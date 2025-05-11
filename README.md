@@ -1,31 +1,60 @@
-# AI-Final-Project
-This repository consists of our AI project, including the proposal, video demo, codes and report.
-# AI Solver for 2048
+AI-Final-Project
+This repository contains the final project for our Artificial Intelligence course, including the proposal, video demonstration, source code, and final report.
 
-## Introduction
+AI Solver for 2048
+Introduction
+This project implements an AI-based solver for the popular puzzle game 2048 using the Expectimax algorithm combined with carefully designed heuristics. The solver is designed to play the game intelligently by evaluating possible future states and selecting optimal moves.
 
-This project aims to develop an AI solver for the game 2048 using heuristic algorithms. The motivation behind this project is to explore heuristic algorithms and their effectiveness in solving complex puzzles like 2048.
+Implementation Details
+The project is written in Python and relies on the numpy library for numerical operations. The AI is encapsulated in a Solver class which interacts with a custom Grid class to simulate the game environment.
 
-## Implementation Details
+Core Components
+Expectimax Algorithm: Simulates possible moves by both the player and the game environment (tile spawns) to predict the most rewarding paths.
 
-The AI solver is implemented in Python, leveraging the `numpy` library for efficient array manipulations and a custom `Grid` class to manage the game state. The core of the solver revolves around predicting the next best move based on heuristic evaluations of the game grid.
+Heuristics: Multiple scoring heuristics are used to evaluate the quality of a game state:
 
-### Operational Logic
+Snake pattern alignment
 
-1. **Initialization**: Upon instantiation, the solver initializes the game grid using the specified size, defaulting to a 4x4 grid, which is typical for 2048.
-2. **Move Prediction**: The `next_move_predictor()` method generates a score for each possible move (up, down, left, right) by copying the grid, applying the move, and evaluating the resulting grid using a scoring function.
-3. **Heuristic Scoring**: The scoring is based on multiple heuristics, including the configuration of tiles in a snake-like pattern, the number of adjacent tiles with the same value, and the count of empty tiles.
-4. **Expectimax Algorithm**: An advanced version of the AI could incorporate the expectimax algorithm to simulate deeper game plays, considering both the deterministic game mechanics and the probabilistic nature of new tile appearance.
+Tile adjacency
 
-### Heuristic Effectiveness
+Number of empty tiles
 
-- **Snake Pattern Scoring**: Awards higher scores to game states where high-value tiles are arranged in a snake-like pattern.
-- **Adjacent Tiles Scoring**: Encourages moves that cluster similar tiles together.
-- **Empty Tiles Count**: Indicates a healthier game state with more possibilities for movement and tile combination.
+Maximum tile value
 
-## Results
+Monotonicity of rows and columns
 
+Move Prediction Logic
+Move Simulation: For each possible direction (w, s, a, d), a move is simulated.
 
-## Conclusion
+Grid Evaluation: The resulting grid is scored using a depth-1 Expectimax evaluation.
 
-The implementation of heuristic-based strategies within the AI solver for 2048 demonstrates a significant improvement in game performance, aligning with the project's aim to develop an effective AI solution for complex puzzle games. The modular and expandable nature of the solver's design also allows for the easy integration of additional heuristics or alternative algorithms such as deep learning models in the future.
+Fallback Strategy: If no legal move improves the state, a simpler heuristic score is used to choose the best fallback move.
+
+Heuristic Breakdown
+Snake Pattern Heuristic: Encourages placing larger tiles in a snake-like pattern (top-left to bottom-right or transposed).
+
+Adjacent Matching Heuristic: Rewards states with more identical adjacent tiles, increasing merge opportunities.
+
+Empty Tile Count: Prefers game states with more empty cells to allow flexibility.
+
+Max Tile Heuristic: Encourages states with higher tile values.
+
+Monotonicity Bonus: Adds bonus scores for rows and columns that are consistently increasing or decreasing.
+
+Features
+Uses depth-limited Expectimax to balance computational efficiency with strategic foresight.
+
+Highly modular design allowing further enhancement with deeper search or different evaluation strategies.
+
+Integration with a graphical Grid interface (pygame display).
+
+Falls back to simpler heuristics when Expectimax doesn't yield a viable move.
+
+Usage
+To run the solver, simply execute the main Python script (typically after initializing the grid):
+
+python game.py
+Ensure all dependencies are installed, including numpy and pygame.
+
+Conclusion
+This AI solver effectively demonstrates how combining probabilistic planning (Expectimax) with domain-specific heuristics can solve complex games like 2048. The modular design allows future integration with deeper search, learning-based approaches, or advanced optimizations.
