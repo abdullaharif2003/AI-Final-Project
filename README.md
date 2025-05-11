@@ -25,8 +25,6 @@ The AI solver is implemented in Python, leveraging the `numpy` library for effic
 
 ## Results
 
-![Screenshot 1](G42.png)
-![Screenshot 2](G5.jpg)
 
 ## Conclusion
 
